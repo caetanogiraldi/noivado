@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noivado · Caetano &amp; Julia</title>
+<meta name="description" content="Domingo, 11 de outubro de 2026, a partir das 12h. Confirme sua presença até 04/10.">
+<meta name="theme-color" content="#FBFAF8">
+
+<!-- Prévia do link no WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://caetanogiraldi.github.io/noivado/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Noivado · Caetano &amp; Julia">
+<meta property="og:description" content="Domingo, 11 de outubro, a partir das 12h. Confirme sua presença até 04/10.">
+<meta property="og:image" content="https://caetanogiraldi.github.io/noivado/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='18' r='9' fill='none' stroke='%232B2A28' stroke-width='2.4'/%3E%3Cpath d='M12 6l4-3 4 3-4 4z' fill='%232B2A28'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;1,9..144,440&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #FBFAF8;
+    --page: #ECE9E3;
+    --ink: #2B2A28;
+    --muted: #6F6B65;
+    --line: #D8D5CE;
+    --soft: #F3F1EC;
+    --ok: #3F6B45;
+    --w: min(calc(100vw - 24px), 640px);
+    --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --sans: 'Jost', 'Helvetica Neue', Helvetica, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--sans); }
+  html.travado { overflow: hidden; }
+  a { color: inherit; }
+  button, input, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* ---------------------------------------------------------- convite */
+  .pagina { min-height: 100vh; display: flex; justify-content: center; padding: 12px 12px 28px; }
+  .convite {
+    position: relative; overflow: hidden; isolation: isolate;
+    width: var(--w); background: var(--bg);
+    padding: calc(var(--w) * 0.17) calc(var(--w) * 0.08) calc(var(--w) * 0.22);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    box-shadow: 0 1px 2px rgba(43,42,40,.06), 0 12px 40px rgba(43,42,40,.08);
+  }
+  @media (min-width: 700px) { .pagina { padding: 40px 12px 56px; } }
+
+  .fundo { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; z-index: -1; pointer-events: none; user-select: none; }
+  .canto { position: absolute; width: max(22px, calc(var(--w) * 0.046)); height: max(22px, calc(var(--w) * 0.046)); border: 0 solid var(--ink); }
+  .canto.ts { top: calc(var(--w) * 0.056); left: calc(var(--w) * 0.056); border-top-width: 1px; border-left-width: 1px; }
+  .canto.td { top: calc(var(--w) * 0.056); right: calc(var(--w) * 0.056); border-top-width: 1px; border-right-width: 1px; }
+  .canto.bs { bottom: calc(var(--w) * 0.056); left: calc(var(--w) * 0.056); border-bottom-width: 1px; border-left-width: 1px; }
+  .canto.bd { bottom: calc(var(--w) * 0.056); right: calc(var(--w) * 0.056); border-bottom-width: 1px; border-right-width: 1px; }
+
+  .rotulo { font-weight: 500; font-size: clamp(11px, calc(var(--w) * 0.02), 14px); letter-spacing: .5em; text-transform: uppercase; color: var(--muted); padding-left: .5em; }
+
+  .nomes { position: relative; z-index: 0; margin-top: clamp(18px, calc(var(--w) * 0.045), 30px); font-family: var(--serif); font-style: italic; font-weight: 440; font-size: clamp(40px, calc(var(--w) * 0.105), 74px); line-height: 1; }
+  .nomes::before, .nomes::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 1px solid var(--line); border-radius: 50%; z-index: -1; pointer-events: none; }
+  .nomes::before { width: calc(var(--w) * 0.62); height: calc(var(--w) * 0.62); }
+  .nomes::after { width: calc(var(--w) * 0.54); height: calc(var(--w) * 0.54); }
+  .nomes .e { display: block; margin: .12em 0; font-style: normal; font-size: .46em; letter-spacing: 2px; color: var(--muted); }
+
+  /* easter egg da Julia: linha de corte */
+  .corte { position: relative; width: 72px; height: 16px; margin-top: clamp(18px, calc(var(--w) * 0.04), 26px); display: flex; align-items: center; cursor: default; outline: none; }
+  .corte::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--muted); }
+  .corte svg { position: relative; background: var(--bg); transition: transform .9s ease-in-out; }
+  .corte:hover svg, .corte:focus svg { transform: translateX(59px); }
+
+  .frase { margin: clamp(14px, calc(var(--w) * 0.03), 21px) 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(16px, calc(var(--w) * 0.028), 19px); color: var(--muted); }
+
+  /* data + tooltip nerd */
+  .tip { position: relative; cursor: default; outline: none; }
+  .tip .dica { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 4px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; background: var(--ink); color: #fff; font-family: var(--sans); font-style: normal; font-weight: 500; font-size: 12px; line-height: 1.2; letter-spacing: .5px; text-transform: none; padding: 7px 12px; border-radius: 3px; white-space: nowrap; z-index: 5; }
+  .tip:hover .dica, .tip:focus .dica { opacity: 1; transform: translate(-50%, 0); }
+  .data { margin-top: clamp(34px, calc(var(--w) * 0.08), 60px); display: flex; align-items: baseline; justify-content: center; gap: clamp(12px, calc(var(--w) * 0.025), 22px); }
+  .data .n { font-family: var(--serif); font-weight: 340; font-size: clamp(38px, calc(var(--w) * 0.085), 64px); line-height: 1; }
+  .data .m { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(22px, calc(var(--w) * 0.046), 34px); line-height: 1; }
+  .data .sep { width: 1px; height: .62em; align-self: center; background: var(--line); font-size: clamp(38px, calc(var(--w) * 0.085), 64px); }
+  .quando { margin-top: 14px; font-weight: 500; font-size: clamp(12px, calc(var(--w) * 0.022), 15px); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .quando svg { display: inline-block; vertical-align: -1px; margin: 0 3px; }
+
+  .traco { width: 40px; height: 1px; background: var(--line); margin-top: clamp(26px, calc(var(--w) * 0.055), 40px); }
+
+  .local { margin-top: clamp(26px, calc(var(--w) * 0.055), 40px); }
+  .local .titulo { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--serif); font-weight: 500; font-size: clamp(20px, calc(var(--w) * 0.034), 24px); }
+  .local .end { margin-top: 6px; font-size: clamp(14px, calc(var(--w) * 0.022), 15px); color: var(--muted); }
+  .notas { margin-top: clamp(20px, calc(var(--w) * 0.04), 30px); font-family: var(--serif); font-style: italic; font-size: clamp(15px, calc(var(--w) * 0.024), 16px); color: var(--muted); line-height: 1.6; }
+  .notas p { margin: 0; }
+
+  .rsvp { margin-top: clamp(32px, calc(var(--w) * 0.07), 50px); width: 100%; max-width: 560px; display: flex; flex-direction: column; align-items: center; gap: 20px; border: 1px solid var(--line); border-radius: 4px; padding: clamp(22px, calc(var(--w) * 0.05), 30px) clamp(16px, calc(var(--w) * 0.05), 40px); background: rgba(43,42,40,.03); }
+  .rsvp .chamada { font-weight: 600; font-size: clamp(13px, calc(var(--w) * 0.022), 15px); letter-spacing: 2.5px; text-transform: uppercase; }
+  .botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 16px; width: 100%; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 14px 28px; border: 1px solid var(--ink); border-radius: 0; font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .15s, color .15s, box-shadow .15s; white-space: nowrap; }
+  .btn-primario { background: var(--ink); color: #fff; box-shadow: 0 8px 20px rgba(43,42,40,.2); }
+  .btn-primario:hover { box-shadow: 0 10px 26px rgba(43,42,40,.3); }
+  .btn-primario img { width: 14.4px; height: 18px; display: block; }
+  .btn-secundario { background: transparent; color: var(--ink); border-color: var(--line); font-weight: 500; }
+  .btn-secundario svg { stroke: var(--ink); transition: stroke .15s; }
+  .btn-secundario:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn-secundario:hover svg { stroke: #fff; }
+  @media (max-width: 460px) { .botoes .btn { width: 100%; } }
+
+  /* easter egg: moto acelera */
+  .moto { transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); transform-origin: 20% 85%; }
+  .btn-rota:hover .moto, .btn-rota:focus-visible .moto, .btn-rota:active .moto { transform: translateX(5px) rotate(-8deg); }
+
+  /* easter eggs: patinhas e data do início do namoro */
+  .patas { position: absolute; right: calc(var(--w) * 0.115); top: calc(var(--w) * 0.12); width: calc(var(--w) * 0.12); height: auto; fill: var(--muted); pointer-events: none; }
+  .comeco { position: absolute; right: calc(var(--w) * 0.056 + max(22px, calc(var(--w) * 0.046)) + 10px); bottom: calc(var(--w) * 0.056 - 4px); z-index: 2; line-height: 1; }
+  .comeco .txt { font-weight: 500; font-size: 9px; letter-spacing: 2px; color: var(--muted); opacity: .6; }
+  .comeco .dica { left: auto; right: -10px; transform: translate(0, 4px); }
+  .comeco:hover .dica, .comeco:focus .dica { transform: translate(0, 0); }
+
+  /* ------------------------------------------------------ confirmação */
+  .fundo-modal { position: fixed; inset: 0; z-index: 50; background: rgba(43,42,40,.45); display: flex; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity .2s; }
+  .fundo-modal[hidden] { display: none; }
+  .fundo-modal.aberto { opacity: 1; }
+  .painel { position: relative; width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--bg); border-radius: 16px 16px 0 0; padding: 26px 22px calc(26px + env(safe-area-inset-bottom)); transform: translateY(24px); transition: transform .25s ease; }
+  .fundo-modal.aberto .painel { transform: translateY(0); }
+  @media (min-width: 560px) { .fundo-modal { align-items: center; } .painel { border-radius: 12px; } }
+  .fechar { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; border-radius: 50%; }
+  .fechar:hover { background: var(--soft); }
+  .painel h2 { margin: 0 44px 6px 0; font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.15; outline: none; }
+  .painel .sub { margin: 0 0 18px; color: var(--muted); font-size: 15px; line-height: 1.45; }
+  .demo { margin: -6px 0 16px; padding: 8px 10px; background: #FFF6DA; border: 1px solid #EFD98E; border-radius: 6px; font-size: 13px; }
+
+  .campo { display: block; width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-size: 16px; }
+  .campo:focus { outline: 2px solid var(--ink); outline-offset: 0; border-color: var(--ink); }
+  textarea.campo { min-height: 84px; resize: vertical; line-height: 1.4; }
+  .rotulo-campo { display: block; margin: 18px 0 6px; font-weight: 600; font-size: 14px; }
+  .rotulo-campo .opc { font-weight: 400; color: var(--muted); }
+
+  .resultados { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  .resultados button { width: 100%; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; text-align: left; cursor: pointer; }
+  .resultados button:hover { border-color: var(--ink); }
+  .resultados .nome { font-weight: 500; font-size: 16px; }
+  .resultados .ident { display: block; font-size: 13px; color: var(--muted); }
+  .etiqueta { flex-shrink: 0; font-size: 12px; padding: 3px 8px; border-radius: 99px; background: var(--soft); color: var(--muted); }
+  .aviso { margin: 12px 0 0; font-size: 14px; color: var(--muted); line-height: 1.45; }
+  .aviso a { font-weight: 500; }
+  .lembrado { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px; padding: 12px 14px; background: var(--soft); border-radius: 8px; font-size: 14px; }
+  .lembrado .acoes { display: flex; gap: 14px; }
+  .link { border: 0; background: none; padding: 6px 0; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: 14px; }
+
+  .membros { border: 0; margin: 0; padding: 0; }
+  .membros legend { padding: 0; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
+  .membro { padding: 12px 0; border-top: 1px solid var(--line); }
+  .membro:first-of-type { border-top: 0; padding-top: 0; }
+  .membro .quem { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 500; }
+  .opcoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .opcao { position: relative; }
+  .opcao input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .opcao span { display: flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-weight: 500; font-size: 15px; transition: background .15s, color .15s, border-color .15s; }
+  .opcao input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .opcao input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .acomp { margin-top: 10px; }
+  .isca { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+  .acoes-form { margin-top: 22px; display: grid; gap: 10px; }
+  .acoes-form .btn { width: 100%; }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; box-shadow: none; }
+  .erro-form { margin: 12px 0 0; color: #9B2C2C; font-size: 14px; }
+
+  .icone-fim { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 14px; background: var(--soft); }
+  .lista-fim { display: grid; gap: 10px; margin-top: 6px; }
+  .lista-fim .btn { width: 100%; }
+  .mini { text-align: center; font-size: 14px; margin-top: 4px; }
+  .carregando { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 14px; margin-top: 12px; }
+  .carregando::before { content: ""; width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--ink); border-radius: 50%; animation: gira .8s linear infinite; }
+  @keyframes gira { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pata" viewBox="0 0 24 24"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8" transform="rotate(-20 5.6 10.4)"/><ellipse cx="9.8" cy="6.6" rx="2.2" ry="2.9"/><ellipse cx="14.2" cy="6.6" rx="2.2" ry="2.9"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8" transform="rotate(20 18.4 10.4)"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+</svg>
+
+<main class="pagina">
+  <article class="convite" aria-label="Convite de noivado de Caetano e Julia">
+    <img class="fundo" src="assets/fundo.webp" alt="" aria-hidden="true" width="1400" height="946" decoding="async">
+    <span class="canto ts" aria-hidden="true"></span><span class="canto td" aria-hidden="true"></span>
+    <span class="canto bs" aria-hidden="true"></span><span class="canto bd" aria-hidden="true"></span>
+
+    <!-- easter egg: trilha de patinhas saindo pelo canto -->
+    <svg class="patas" viewBox="0 0 100 100" aria-hidden="true">
+      <use href="#pata" x="0" y="72" width="16" height="16" transform="rotate(45 8 80)" opacity=".18"/>
+      <use href="#pata" x="17" y="52" width="16" height="16" transform="rotate(45 25 60)" opacity=".24"/>
+      <use href="#pata" x="42" y="42" width="16" height="16" transform="rotate(45 50 50)" opacity=".30"/>
+      <use href="#pata" x="57" y="20" width="16" height="16" transform="rotate(45 65 28)" opacity=".36"/>
+      <use href="#pata" x="82" y="10" width="16" height="16" transform="rotate(45 90 18)" opacity=".42"/>
+    </svg>
+
+    <!-- easter egg: início do namoro -->
+    <div class="comeco tip" tabindex="0">
+      <span class="txt">25 · 09 · 2016</span>
+      <span class="dica" role="tooltip">onde tudo começou</span>
+    </div>
+
+    <div class="rotulo">Noivado</div>
+
+    <h1 class="nomes">Caetano<span class="e">&amp;</span>Julia</h1>
+
+    <!-- easter egg da Julia (salão): linha de corte -->
+    <div class="corte" tabindex="0" aria-hidden="true">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+    </div>
+
+    <p class="frase">vamos comemorar juntos esse novo começo</p>
+
+    <div class="data tip" tabindex="0" aria-label="11 de outubro de 2026">
+      <span class="dica" role="tooltip">status: deploy em produção · sem rollback previsto</span>
+      <span class="n" aria-hidden="true">11</span><span class="sep" aria-hidden="true"></span>
+      <span class="m" aria-hidden="true">outubro</span><span class="sep" aria-hidden="true"></span>
+      <span class="n" aria-hidden="true">2026</span>
+    </div>
+    <div class="quando">Domingo <svg width="10" height="10" fill="currentColor" aria-hidden="true"><use href="#pata"/></svg> a partir das 12h</div>
+
+    <div class="traco" aria-hidden="true"></div>
+
+    <div class="local">
+      <div class="titulo"><svg width="17" height="17" fill="none" stroke="#2B2A28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#pin"/></svg>Local</div>
+      <div class="end">Av. Uchoa, 500 · Jardim América</div>
+    </div>
+
+    <div class="notas">
+      <p>traga roupa de banho — vai ter piscina</p>
+      <p>bebidas não alcoólicas inclusas</p>
+    </div>
+
+    <section class="rsvp" aria-label="Confirmação de presença">
+      <div class="chamada">Confirme sua presença até 04&nbsp;de&nbsp;outubro</div>
+      <div class="botoes">
+        <button type="button" class="btn btn-primario" id="abrir-rsvp">
+          <img src="assets/simbolo.png" alt="" width="14" height="18">Confirmar presença
+        </button>
+        <a class="btn btn-secundario btn-rota" id="link-rota" href="#" target="_blank" rel="noopener">
+          <svg class="moto" width="24" height="15" viewBox="0 0 32 20" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="14.5" r="4.2"/><circle cx="25.5" cy="14.5" r="4.2"/><path d="M2.5,7.2 L9.5,9 L12.5,8.6 C13.6,6.6 15.8,5.6 18.2,6 L21.4,3.4 L23.6,4.4 L25.8,8.8"/><path d="M25.8,8.8 L22.6,11.8 L14.2,12.6 L11.2,10.2"/><path d="M2.5,7.2 L5.6,10.2 L11.2,10.2"/><path d="M6.5,14.5 L14.2,12.6"/><path d="M22.2,6.8 L25.5,14.5"/></svg>
+          Como chegar
+        </a>
+      </div>
+    </section>
+  </article>
+</main>
+
+<!-- ------------------------------------------------ painel de confirmação -->
+<div class="fundo-modal" id="modal" hidden>
+  <div class="painel" role="dialog" aria-modal="true" aria-labelledby="titulo-painel">
+    <button type="button" class="fechar" id="fechar" aria-label="Fechar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="titulo-painel" tabindex="-1">Confirmar presença</h2>
+    <div id="aviso-demo" class="demo" hidden>Modo demonstração: as respostas não são salvas.</div>
+
+    <!-- 1. busca -->
+    <section id="v-busca">
+      <div class="lembrado" id="lembrado" hidden>
+        <span>Você respondeu como <strong id="lembrado-nome"></strong>.</span>
+        <span class="acoes"><button type="button" class="link" id="lembrado-ver">Ver ou alterar</button><button type="button" class="link" id="lembrado-sair">Não sou eu</button></span>
+      </div>
+      <p class="sub">Digite seu nome para encontrar o seu convite.</p>
+      <label class="rotulo-campo" for="busca" style="margin-top:0">Seu nome</label>
+      <input class="campo" id="busca" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Ex.: Marcela" maxlength="60">
+      <div id="busca-estado" aria-live="polite"></div>
+      <ul class="resultados" id="resultados"></ul>
+      <p class="aviso" id="busca-ajuda" hidden>Não encontrou seu nome? Tente só o primeiro nome ou <a id="contato-1" href="#" target="_blank" rel="noopener">fale com a gente pelo WhatsApp</a>.</p>
+    </section>
+
+    <!-- 2. formulário -->
+    <section id="v-form" hidden>
+      <p class="sub" id="form-sub"></p>
+      <form id="form" novalidate>
+        <fieldset class="membros" id="membros"></fieldset>
+        <div id="bloco-restricao">
+          <label class="rotulo-campo" for="restricao">Alguma restrição alimentar? <span class="opc">(opcional)</span></label>
+          <input class="campo" id="restricao" maxlength="200" placeholder="Ex.: vegetariano, alergia a...">
+        </div>
+        <label class="rotulo-campo" for="recado">Recado para os noivos <span class="opc">(opcional)</span></label>
+        <textarea class="campo" id="recado" maxlength="500"></textarea>
+        <input class="isca" type="text" name="site" id="isca" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="erro-form" id="erro-form" role="alert" hidden></p>
+        <div class="acoes-form">
+          <button type="submit" class="btn btn-primario" id="enviar" disabled>Enviar resposta</button>
+          <button type="button" class="link mini" id="voltar">Não é você? Voltar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 3. fim -->
+    <section id="v-fim" hidden>
+      <div class="icone-fim" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3F6B45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <p class="sub" id="fim-texto"></p>
+      <div class="lista-fim">
+        <a class="btn btn-primario" id="agenda-google" href="#" target="_blank" rel="noopener">Adicionar à agenda</a>
+        <button type="button" class="link mini" id="agenda-ics">Apple / Outlook (.ics)</button>
+        <a class="btn btn-secundario btn-rota" id="fim-rota" href="#" target="_blank" rel="noopener">Como chegar</a>
+        <button type="button" class="link mini" id="alterar">Alterar resposta (até 04/10)</button>
+      </div>
+    </section>
+
+    <!-- 4. encerrado -->
+    <section id="v-encerrado" hidden>
+      <p class="sub">As confirmações foram encerradas em 04/10. Se precisar falar com a gente, é só chamar.</p>
+      <a class="btn btn-secundario" id="contato-2" href="#" target="_blank" rel="noopener" style="width:100%">Falar pelo WhatsApp</a>
+    </section>
+
+    <!-- 5. erro -->
+    <section id="v-erro" hidden>
+      <p class="sub">Não conseguimos conectar agora. Verifique sua internet e tente de novo.</p>
+      <div class="lista-fim">
+        <button type="button" class="btn btn-primario" id="tentar">Tentar de novo</button>
+        <a class="btn btn-secundario" id="contato-3" href="#" target="_blank" rel="noopener">Confirmar pelo WhatsApp</a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ========================= CONFIGURAÇÃO ========================= */
+const CONFIG = {
+  // URL do App da Web do Apps Script (termina em /exec). Vazio = modo demonstração.
+  API_URL: 'https://script.google.com/macros/s/AKfycbzjZwInudqhsxiK60hIlrLUdUGQXjT_WRMdZ6niFyGiqA5N1Z1n2M9E4BdR7DUnYFMx/exec',
+  WHATSAPP_CONTATO: 'https://wa.me/qr/NJOBASSMOSQ4O1',
+  MAPS: 'https://maps.app.goo.gl/p9FqT5cP8XwGzQWPA?g_st=ac',
+  PRAZO: '2026-10-04T23:59:59-03:00',
+};
+/* =============================================================== */
+
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const DEMO = !CONFIG.API_URL;
+  const params = new URLSearchParams(location.search);
+
+  // links fixos
+  ['link-rota', 'fim-rota'].forEach((id) => { $(id).href = CONFIG.MAPS; });
+  ['contato-1', 'contato-2', 'contato-3'].forEach((id) => { $(id).href = CONFIG.WHATSAPP_CONTATO; });
+
+  // agenda
+  const EVENTO = {
+    titulo: 'Noivado Caetano & Julia',
+    inicio: '20261011T150000Z', fim: '20261011T210000Z', // 12h às 18h (Brasília)
+    local: 'Av. Uchoa, 500 - Jardim América',
+    detalhes: 'Traga roupa de banho, vai ter piscina! Como chegar: ' + CONFIG.MAPS,
+  };
+  $('agenda-google').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent(EVENTO.titulo) + '&dates=' + EVENTO.inicio + '/' + EVENTO.fim +
+    '&location=' + encodeURIComponent(EVENTO.local) + '&details=' + encodeURIComponent(EVENTO.detalhes);
+  $('agenda-ics').addEventListener('click', () => {
+    const esc = (s) => s.replace(/[\\,;]/g, (m) => '\\' + m);
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//noivado-caetano-julia//pt-BR', 'BEGIN:VEVENT',
+      'UID:noivado-caetano-julia-20261011', 'DTSTAMP:20260928T120000Z',
+      'DTSTART:' + EVENTO.inicio, 'DTEND:' + EVENTO.fim, 'SUMMARY:' + esc(EVENTO.titulo),
+      'LOCATION:' + esc(EVENTO.local), 'DESCRIPTION:' + esc(EVENTO.detalhes), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    const a = document.createElement('a'); a.href = url; a.download = 'noivado-caetano-julia.ics';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 5000);
+  });
+
+  /* ------------------------------------------------------------ API */
+  const api = DEMO ? criarDemo() : {
+    async get(params) {
+      const url = CONFIG.API_URL + '?' + new URLSearchParams(params).toString();
+      return pedir(url, { method: 'GET' });
+    },
+    async post(body) {
+      // text/plain evita pré-verificação CORS no Apps Script
+      return pedir(CONFIG.API_URL, { method: 'POST', body: JSON.stringify(body) });
+    },
+  };
+  async function pedir(url, opts) {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 25000);
+    try {
+      const r = await fetch(url, Object.assign({ signal: ctrl.signal, redirect: 'follow' }, opts));
+      if (!r.ok) throw new Error('http ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
+
+  function criarDemo() {
+    const pessoas = [
+      { id: 'd1', nome: 'Ana Exemplo', grupo: 'd1' },
+      { id: 'd1a', nome: 'Acompanhante da Ana', grupo: 'd1', acompanhante: true },
+      { id: 'd2', nome: 'Bruno Exemplo', grupo: 'd2' },
+      { id: 'd3', nome: 'Carla Exemplo', grupo: 'd3' },
+      { id: 'd4', nome: 'Davi Exemplo', grupo: 'd3', crianca: true },
+    ];
+    const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+    const espera = (v) => new Promise((ok) => setTimeout(() => ok(v), 450));
+    const fechado = params.get('demo') === 'encerrado';
+    const membros = (p) => pessoas.filter((x) => x.grupo === p.grupo).map((m) => ({
+      id: m.id, nome: m.nome, acompanhante: !!m.acompanhante, crianca: !!m.crianca, status: m.status || '', nome_acompanhante: m.nome_acompanhante || '' }));
+    return {
+      async get(q) {
+        if (fechado) return espera({ ok: false, erro: 'encerrado' });
+        if (q.action === 'search') {
+          const termos = norm(q.q || '').split(/\s+/).filter(Boolean);
+          if (termos.join('').length < 2) return espera({ ok: true, resultados: [] });
+          return espera({ ok: true, resultados: pessoas.filter((p) => !p.acompanhante && termos.every((t) => norm(p.nome).split(' ').some((w) => w.startsWith(t))))
+            .map((p) => ({ id: p.id, nome: p.nome, identificacao: '', respondeu: !!p.status })) });
+        }
+        if (q.action === 'group') {
+          const p = pessoas.find((x) => x.id === q.id);
+          return espera(p ? { ok: true, pessoa: { id: p.id, nome: p.nome }, membros: membros(p), restricao: p.restricao || '', recado: p.recado || '' } : { ok: false, erro: 'nao_encontrado' });
+        }
+        return espera({ ok: false, erro: 'acao_invalida' });
+      },
+      async post(b) {
+        if (fechado) return espera({ ok: false, erro: 'encerrado' });
+        let vao = 0;
+        b.membros.forEach((r) => { const m = pessoas.find((x) => x.id === r.id); m.status = r.vai ? 'Vai' : 'Não vai'; m.nome_acompanhante = r.nome_acompanhante || ''; if (r.vai) vao++; });
+        const p = pessoas.find((x) => x.id === b.id); p.restricao = b.restricao; p.recado = b.recado;
+        return espera({ ok: true, vao, total: b.membros.length });
+      },
+    };
+  }
+
+  /* ------------------------------------------------------- memória */
+  const CHAVE = 'noivado-rsvp';
+  const lembrar = (v) => { try { v ? localStorage.setItem(CHAVE, JSON.stringify(v)) : localStorage.removeItem(CHAVE); } catch (e) {} };
+  const lembrado = () => { try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } };
+
+  /* --------------------------------------------------------- telas */
+  const modal = $('modal');
+  const VIEWS = ['v-busca', 'v-form', 'v-fim', 'v-encerrado', 'v-erro'];
+  let ultimaAcao = null;   // para "tentar de novo"
+  let grupoAtual = null;
+  let origemFoco = null;
+
+  function mostrar(view, titulo) {
+    VIEWS.forEach((v) => { $(v).hidden = v !== view; });
+    $('titulo-painel').textContent = titulo;
+    $('titulo-painel').focus({ preventScroll: true });
+    $('modal').querySelector('.painel').scrollTop = 0;
+  }
+
+  function abrir() {
+    origemFoco = document.activeElement;
+    modal.hidden = false;
+    document.documentElement.classList.add('travado');
+    requestAnimationFrame(() => modal.classList.add('aberto'));
+    $('aviso-demo').hidden = !DEMO;
+    if (Date.now() > new Date(CONFIG.PRAZO).getTime() || (DEMO && params.get('demo') === 'encerrado')) {
+      return mostrar('v-encerrado', 'Confirmações encerradas');
+    }
+    telaBusca();
+  }
+  function fechar() {
+    modal.classList.remove('aberto');
+    document.documentElement.classList.remove('travado');
+    setTimeout(() => { modal.hidden = true; }, 200);
+    if (origemFoco && origemFoco.focus) origemFoco.focus();
+  }
+  $('abrir-rsvp').addEventListener('click', abrir);
+  $('fechar').addEventListener('click', fechar);
+  modal.addEventListener('click', (e) => { if (e.target === modal) fechar(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) fechar(); });
+  if (params.get('confirmar') === '1') abrir();
+
+  function erro(acao) { ultimaAcao = acao; mostrar('v-erro', 'Ops!'); }
+  $('tentar').addEventListener('click', () => { if (ultimaAcao) ultimaAcao(); });
+  function tratar(res, acao) {
+    if (res && res.ok) return true;
+    if (res && res.erro === 'encerrado') { mostrar('v-encerrado', 'Confirmações encerradas'); return false; }
+    if (res && res.erro === 'nao_encontrado') { lembrar(null); telaBusca(); return false; }
+    erro(acao); return false;
+  }
+
+  /* ---------------------------------------------------------- busca */
+  let buscaTimer = null, buscaSeq = 0;
+  function telaBusca() {
+    mostrar('v-busca', 'Confirmar presença');
+    const mem = lembrado();
+    $('lembrado').hidden = !mem;
+    if (mem) $('lembrado-nome').textContent = mem.nome;
+    $('resultados').replaceChildren();
+    $('busca-estado').replaceChildren();
+    $('busca-ajuda').hidden = true;
+    $('busca').value = '';
+    setTimeout(() => $('busca').focus({ preventScroll: true }), 60);
+  }
+  $('lembrado-ver').addEventListener('click', () => { const m = lembrado(); if (m) abrirGrupo(m.id); });
+  $('lembrado-sair').addEventListener('click', () => { lembrar(null); $('lembrado').hidden = true; $('busca').focus(); });
+
+  $('busca').addEventListener('input', () => {
+    clearTimeout(buscaTimer);
+    const q = $('busca').value.trim();
+    $('busca-ajuda').hidden = true;
+    if (q.replace(/\s/g, '').length < 2) { $('resultados').replaceChildren(); $('busca-estado').replaceChildren(); return; }
+    buscaTimer = setTimeout(() => buscar(q), 350);
+  });
+
+  async function buscar(q) {
+    const seq = ++buscaSeq;
+    const est = $('busca-estado');
+    const load = document.createElement('div'); load.className = 'carregando'; load.textContent = 'Buscando...';
+    est.replaceChildren(load);
+    let res;
+    try { res = await api.get({ action: 'search', q }); } catch (e) { if (seq === buscaSeq) erro(() => { telaBusca(); $('busca').value = q; buscar(q); }); return; }
+    if (seq !== buscaSeq) return;
+    est.replaceChildren();
+    if (!tratar(res, () => { telaBusca(); $('busca').value = q; buscar(q); })) return;
+    const ul = $('resultados');
+    ul.replaceChildren();
+    res.resultados.forEach((p) => {
+      const li = document.createElement('li');
+      const b = document.createElement('button'); b.type = 'button';
+      const txt = document.createElement('span');
+      const nome = document.createElement('span'); nome.className = 'nome'; nome.textContent = p.nome;
+      txt.appendChild(nome);
+      if (p.identificacao) { const i = document.createElement('span'); i.className = 'ident'; i.textContent = p.identificacao; txt.appendChild(i); }
+      b.appendChild(txt);
+      if (p.respondeu) { const tag = document.createElement('span'); tag.className = 'etiqueta'; tag.textContent = 'já respondeu'; b.appendChild(tag); }
+      b.addEventListener('click', () => abrirGrupo(p.id));
+      li.appendChild(b); ul.appendChild(li);
+    });
+    if (res.resultados.length === 0) {
+      const p = document.createElement('p'); p.className = 'aviso'; p.textContent = 'Nenhum nome encontrado.';
+      est.appendChild(p);
+    }
+    $('busca-ajuda').hidden = false;
+  }
+
+  /* ----------------------------------------------------------- form */
+  async function abrirGrupo(id) {
+    mostrar('v-form', 'Carregando...');
+    $('membros').replaceChildren();
+    const load = document.createElement('div'); load.className = 'carregando'; load.textContent = 'Carregando seu convite...';
+    $('membros').appendChild(load);
+    $('form-sub').textContent = '';
+    let res;
+    try { res = await api.get({ action: 'group', id }); } catch (e) { return erro(() => abrirGrupo(id)); }
+    if (!tratar(res, () => abrirGrupo(id))) return;
+    grupoAtual = res;
+    montarForm(res);
+  }
+
+  function montarForm(g) {
+    const primeiro = g.pessoa.nome.split(' ').filter((w) => !/^(tia|tio|vó|vô)$/i.test(w))[0] || g.pessoa.nome;
+    mostrar('v-form', 'Olá, ' + primeiro + '!');
+    const unico = g.membros.length === 1;
+    const jaRespondeu = g.membros.some((m) => m.status);
+    $('form-sub').textContent = jaRespondeu
+      ? 'Você já respondeu. Pode alterar o que quiser até 04/10.'
+      : (unico ? 'Conta pra gente se você vem.' : 'Marque quem vem do seu convite.');
+
+    const fs = $('membros');
+    fs.replaceChildren();
+    const lg = document.createElement('legend'); lg.textContent = unico ? 'Você vai?' : 'Quem vai?';
+    fs.appendChild(lg);
+
+    g.membros.forEach((m, i) => {
+      const box = document.createElement('div'); box.className = 'membro'; box.dataset.id = m.id;
+      if (!unico) {
+        const quem = document.createElement('div'); quem.className = 'quem';
+        const nome = document.createElement('span');
+        nome.textContent = i === 0 ? m.nome + ' (você)' : (m.acompanhante && m.nome_acompanhante ? m.nome_acompanhante : m.nome);
+        quem.appendChild(nome);
+        if (m.crianca) quem.appendChild(tag('criança'));
+        box.appendChild(quem);
+      }
+      const ops = document.createElement('div'); ops.className = 'opcoes'; ops.setAttribute('role', 'radiogroup');
+      ops.setAttribute('aria-label', unico ? 'Você vai?' : m.nome);
+      [['sim', unico ? 'Vou' : 'Vai'], ['nao', unico ? 'Não vou' : 'Não vai']].forEach(([val, rot]) => {
+        const lab = document.createElement('label'); lab.className = 'opcao';
+        const inp = document.createElement('input'); inp.type = 'radio'; inp.name = 'r-' + m.id; inp.value = val;
+        if ((m.status === 'Vai' && val === 'sim') || (m.status === 'Não vai' && val === 'nao')) inp.checked = true;
+        const sp = document.createElement('span'); sp.textContent = rot;
+        lab.append(inp, sp); ops.appendChild(lab);
+      });
+      box.appendChild(ops);
+      if (m.acompanhante) {
+        const wrap = document.createElement('div'); wrap.className = 'acomp';
+        const l = document.createElement('label'); l.className = 'rotulo-campo'; l.style.margin = '0 0 6px';
+        l.htmlFor = 'nome-' + m.id; l.innerHTML = 'Nome do(a) acompanhante <span class="opc">(opcional)</span>';
+        const inp = document.createElement('input'); inp.className = 'campo'; inp.id = 'nome-' + m.id; inp.maxLength = 60;
+        inp.value = m.nome_acompanhante || '';
+        wrap.append(l, inp); box.appendChild(wrap);
+      }
+      fs.appendChild(box);
+    });
+    $('restricao').value = g.restricao || '';
+    $('recado').value = g.recado || '';
+    $('isca').value = '';
+    $('erro-form').hidden = true;
+    atualizarForm();
+  }
+  function tag(t) { const s = document.createElement('span'); s.className = 'etiqueta'; s.textContent = t; return s; }
+
+  function respostas() {
+    return [...document.querySelectorAll('#membros .membro')].map((box) => {
+      const sel = box.querySelector('input[type=radio]:checked');
+      const nome = box.querySelector('.acomp input');
+      return { id: box.dataset.id, vai: sel ? sel.value === 'sim' : null, nome_acompanhante: nome ? nome.value.trim() : undefined, box };
+    });
+  }
+  function atualizarForm() {
+    const rs = respostas();
+    rs.forEach((r) => { const a = r.box.querySelector('.acomp'); if (a) a.hidden = r.vai !== true; });
+    $('bloco-restricao').hidden = !rs.some((r) => r.vai === true);
+    $('enviar').disabled = rs.some((r) => r.vai === null);
+  }
+  $('membros').addEventListener('change', atualizarForm);
+  $('voltar').addEventListener('click', () => { lembrar(null); telaBusca(); });
+
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const rs = respostas();
+    if (!grupoAtual || rs.some((r) => r.vai === null)) return;
+    const payload = {
+      id: grupoAtual.pessoa.id,
+      membros: rs.map((r) => ({ id: r.id, vai: r.vai, nome_acompanhante: r.vai ? r.nome_acompanhante : '' })),
+      restricao: rs.some((r) => r.vai) ? $('restricao').value.trim() : '',
+      recado: $('recado').value.trim(),
+      site: $('isca').value,
+    };
+    await enviar(payload);
+  });
+
+  async function enviar(payload) {
+    const bt = $('enviar'); bt.disabled = true; bt.textContent = 'Enviando...';
+    $('erro-form').hidden = true;
+    let res;
+    try { res = await api.post(payload); }
+    catch (e) {
+      bt.disabled = false; bt.textContent = 'Enviar resposta';
+      $('erro-form').textContent = 'Não conseguimos enviar agora. Verifique sua internet e tente de novo.';
+      $('erro-form').hidden = false; return;
+    } finally { bt.textContent = 'Enviar resposta'; }
+    if (!res || !res.ok) {
+      if (res && (res.erro === 'encerrado' || res.erro === 'nao_encontrado')) return tratar(res);
+      bt.disabled = false;
+      $('erro-form').textContent = 'Algo não deu certo. Tente de novo ou fale com a gente pelo WhatsApp.';
+      $('erro-form').hidden = false; return;
+    }
+    lembrar({ id: grupoAtual.pessoa.id, nome: grupoAtual.pessoa.nome });
+    telaFim(res.vao, payload.membros.length);
+  }
+
+  function telaFim(vao, total) {
+    const vem = vao > 0;
+    mostrar('v-fim', vem ? 'Presença confirmada!' : 'Resposta registrada');
+    $('fim-texto').textContent = vem
+      ? (total > 1 ? (vao === 1 ? '1 pessoa confirmada. ' : vao + ' pessoas confirmadas. ') : 'Que bom que você vem! ') + 'Esperamos vocês no domingo, 11/10, a partir das 12h.'
+      : 'Que pena que não vai dar! Obrigado por avisar.';
+    if (vem && total === 1) $('fim-texto').textContent = 'Que bom que você vem! Te esperamos no domingo, 11/10, a partir das 12h.';
+    $('agenda-google').hidden = !vem;
+    $('agenda-ics').hidden = !vem;
+    $('fim-rota').hidden = !vem;
+    document.querySelector('.icone-fim').hidden = !vem;
+  }
+  $('alterar').addEventListener('click', () => { if (grupoAtual) abrirGrupo(grupoAtual.pessoa.id); });
+})();
+</script>
+</body>
+</html>
