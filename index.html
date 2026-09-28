@@ -410,6 +410,9 @@ const CONFIG = {
     return {
       async get(q) {
         if (fechado) return espera({ ok: false, erro: 'encerrado' });
+        if (q.action === 'lista') {
+          return espera({ ok: true, convidados: pessoas.filter((p) => !p.acompanhante).map((p) => ({ id: p.id, nome: p.nome, identificacao: '' })) });
+        }
         if (q.action === 'search') {
           const termos = norm(q.q || '').split(/\s+/).filter(Boolean);
           if (termos.join('').length < 2) return espera({ ok: true, resultados: [] });
@@ -431,6 +434,30 @@ const CONFIG = {
       },
     };
   }
+
+  /* ------------------------------------- lista para busca no aparelho */
+  const normalizar = (v) => String(v == null ? '' : v).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  let listaPromessa = null;
+  function carregarLista() {
+    if (!listaPromessa) {
+      listaPromessa = api.get({ action: 'lista' }).then((r) => {
+        if (r && r.ok && Array.isArray(r.convidados)) {
+          return r.convidados.map((c) => Object.assign({ palavras: normalizar(c.nome + ' ' + (c.identificacao || '')).split(' ') }, c));
+        }
+        if (r && r.erro === 'encerrado') return 'encerrado';
+        throw new Error('lista indisponível');
+      });
+      listaPromessa.catch(() => { listaPromessa = null; }); // próxima busca tenta de novo
+    }
+    return listaPromessa;
+  }
+  function filtrar(lista, q) {
+    const termos = normalizar(q).split(' ').filter(Boolean);
+    return lista.filter((c) => termos.every((t) => c.palavras.some((w) => w.indexOf(t) === 0))).slice(0, 8);
+  }
+  // pré-carrega enquanto a pessoa lê o convite
+  setTimeout(() => { carregarLista().catch(() => {}); }, 600);
 
   /* ------------------------------------------------------- memória */
   const CHAVE = 'noivado-rsvp';
@@ -504,22 +531,42 @@ const CONFIG = {
     const q = $('busca').value.trim();
     $('busca-ajuda').hidden = true;
     if (q.replace(/\s/g, '').length < 2) { $('resultados').replaceChildren(); $('busca-estado').replaceChildren(); return; }
-    buscaTimer = setTimeout(() => buscar(q), 350);
+    buscaTimer = setTimeout(() => buscar(q), 120);
   });
 
   async function buscar(q) {
     const seq = ++buscaSeq;
     const est = $('busca-estado');
+    const refazer = () => { telaBusca(); $('busca').value = q; buscar(q); };
     const load = document.createElement('div'); load.className = 'carregando'; load.textContent = 'Buscando...';
-    est.replaceChildren(load);
-    let res;
-    try { res = await api.get({ action: 'search', q }); } catch (e) { if (seq === buscaSeq) erro(() => { telaBusca(); $('busca').value = q; buscar(q); }); return; }
-    if (seq !== buscaSeq) return;
+    const aviso = setTimeout(() => { if (seq === buscaSeq) est.replaceChildren(load); }, 150);
+
+    let lista = null;
+    try { lista = await carregarLista(); } catch (e) { lista = null; }
+    if (seq !== buscaSeq) return clearTimeout(aviso);
+    if (lista === 'encerrado') { clearTimeout(aviso); return mostrar('v-encerrado', 'Confirmações encerradas'); }
+
+    let resultados;
+    if (lista) {
+      resultados = filtrar(lista, q);
+    } else {
+      // reserva: busca no servidor
+      let res;
+      try { res = await api.get({ action: 'search', q }); } catch (e) { clearTimeout(aviso); if (seq === buscaSeq) erro(refazer); return; }
+      if (seq !== buscaSeq) return clearTimeout(aviso);
+      if (!tratar(res, refazer)) return clearTimeout(aviso);
+      resultados = res.resultados;
+    }
+    clearTimeout(aviso);
     est.replaceChildren();
-    if (!tratar(res, () => { telaBusca(); $('busca').value = q; buscar(q); })) return;
+    mostrarResultados(resultados);
+  }
+
+  function mostrarResultados(resultados) {
+    const est = $('busca-estado');
     const ul = $('resultados');
     ul.replaceChildren();
-    res.resultados.forEach((p) => {
+    resultados.forEach((p) => {
       const li = document.createElement('li');
       const b = document.createElement('button'); b.type = 'button';
       const txt = document.createElement('span');
@@ -531,7 +578,7 @@ const CONFIG = {
       b.addEventListener('click', () => abrirGrupo(p.id));
       li.appendChild(b); ul.appendChild(li);
     });
-    if (res.resultados.length === 0) {
+    if (resultados.length === 0) {
       const p = document.createElement('p'); p.className = 'aviso'; p.textContent = 'Nenhum nome encontrado.';
       est.appendChild(p);
     }
