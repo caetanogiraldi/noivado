@@ -456,8 +456,8 @@ const CONFIG = {
     const termos = normalizar(q).split(' ').filter(Boolean);
     return lista.filter((c) => termos.every((t) => c.palavras.some((w) => w.indexOf(t) === 0))).slice(0, 8);
   }
-  // pré-carrega enquanto a pessoa lê o convite
-  setTimeout(() => { carregarLista().catch(() => {}); }, 600);
+  // pede a lista assim que a página abre, enquanto a pessoa lê o convite
+  carregarLista().catch(() => {});
 
   /* ------------------------------------------------------- memória */
   const CHAVE = 'noivado-rsvp';
